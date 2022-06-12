@@ -6,11 +6,27 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+ul,
+li {
+  text-decoration: none;
+}
+
 a {
+  cursor: pointer;
   color: inherit;
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+.app-container {
+  min-height: 350px;
+}
+
+.btn-delete-user {
+  width: 40px;
+  text-align: center;
+  box-sizing: content-box;
 }
