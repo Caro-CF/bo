@@ -30,7 +30,7 @@ function Index() {
     <div>
       <h1>Utilisateurs</h1>
       <Link href="/users/add" className="btn btn-sm btn-success mb-2">
-        Add User
+        Ajouter un utilisateur
       </Link>
       <table className="table table-striped">
         <thead>
@@ -47,9 +47,7 @@ function Index() {
           {users &&
             users.map((user) => (
               <tr key={user.usr_id}>
-                <td>
-                  {user.pseudo}  
-                </td>
+                <td>{user.pseudo}</td>
                 <td>{user.firstname}</td>
                 <td>{user.lastname}</td>
                 <td>{user.mail}</td>
@@ -58,8 +56,9 @@ function Index() {
                   <Link
                     href={`/users/edit/${user.usr_id}`}
                     className="btn btn-sm btn-primary mr-1"
+                    id="btn-edit"
                   >
-                    Edit
+                    Edition
                   </Link>
                   <button
                     onClick={() => deleteUser(user.usr_id)}
@@ -69,7 +68,7 @@ function Index() {
                     {user.isDeleting ? (
                       <span className="spinner-border spinner-border-sm"></span>
                     ) : (
-                      <span>Delete</span>
+                      <span>Supprimer</span>
                     )}
                   </button>
                 </td>

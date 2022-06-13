@@ -89,7 +89,7 @@ function AddEdit(props) {
                     <div className="invalid-feedback">{errors.roles?.message}</div>
                 </div>
                 <div className="form-group col-5">
-                    <label>Prenom</label>
+                    <label>Prénom</label>
                     <input name="firstname" type="text" {...register('firstname')} className={`form-control ${errors.firstname ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.firstname?.message}</div>
                 </div>
@@ -137,7 +137,7 @@ function AddEdit(props) {
                     <div className="invalid-feedback">{errors.password?.message}</div>
                 </div>
                 <div className="form-group col">
-                    <label>Confirm Password</label>
+                    <label>Confirmer le mot de passe</label>
                     <input name="confirmPassword" type="password" {...register('confirmPassword')} className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.confirmPassword?.message}</div>
                 </div>
@@ -145,10 +145,10 @@ function AddEdit(props) {
             <div className="form-group">
                 <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary mr-2">
                     {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
-                    Save
+                    Sauvegarder
                 </button>
-                <button onClick={() => reset(formOptions.defaultValues)} type="button" disabled={formState.isSubmitting} className="btn btn-secondary">Reset</button>
-                <Link href="/users" className="btn btn-link">Cancel</Link>
+                <button onClick={() => reset(formOptions.defaultValues)} type="button" disabled={formState.isSubmitting} className="btn btn-secondary">Mise a zéro</button>
+                <Link href="/users" className="btn btn-link">Annuler</Link>
             </div>
         </form>
     );
