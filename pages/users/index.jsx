@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 import { Link } from "../../components";
@@ -35,6 +36,7 @@ function Index() {
       <table className="table table-striped">
         <thead>
           <tr>
+            <th style={{ width: "10%" }}></th>
             <th style={{ width: "30%" }}>Pseudo</th>
             <th style={{ width: "30%" }}>Prenom</th>
             <th style={{ width: "30%" }}>Nom</th>
@@ -47,6 +49,16 @@ function Index() {
           {users &&
             users.map((user) => (
               <tr key={user.usr_id}>
+                <td>
+                  {/* <Image
+                    src={"/public/upload/images/avatar/" + user.avatar_img}
+                    // src={"/public/upload/images/avatar/" + user.avatar_img}
+                    alt="Avatar de l'utilisateur"
+                    width={30}
+                    height={30}
+                  /> */}
+                  <img src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`} width={50} height={50} alt="Avatar de l'utilisateur" />
+                </td>
                 <td>{user.pseudo}</td>
                 <td>{user.firstname}</td>
                 <td>{user.lastname}</td>
@@ -84,7 +96,7 @@ function Index() {
           {users && !users.length && (
             <tr>
               <td colSpan="4" className="text-center">
-                <div className="p-2">No Users To Display</div>
+                <div className="p-2">Aucun utilisateur</div>
               </td>
             </tr>
           )}

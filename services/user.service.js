@@ -17,7 +17,7 @@ function getAll() {
 }
 
 function getById(id) {
-  return fetchWrapper.get(`http://localhost:3000/api/users/${id}`);
+  return fetchWrapper.get(`${baseUrl}/${id}`);
 }
 
 function create(params) {

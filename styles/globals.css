@@ -21,6 +21,11 @@ a {
   text-decoration: none;
 }
 
+img {
+  display: flex;
+  align-items: center;
+}
+
 .app-container {
   min-height: 350px;
 }
@@ -31,6 +36,6 @@ a {
   box-sizing: content-box;
 }
 
-#btn-edit{
+#btn-edit {
   width: 78px;
 }
