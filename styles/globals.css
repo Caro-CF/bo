@@ -39,3 +39,36 @@ img {
 #btn-edit {
   width: 78px;
 }
+
+#bio input {
+  height: 100%;
+}
+
+.btn-primary {
+  background: #001b2b;
+  border: #001b2b 1px;
+  color: white;
+}
+.btn-primary:hover {
+  background: #002a42;
+  border: #002a42 1px;
+  color: white;
+}
+.btn-danger {
+  background: #bd2866;
+  border: #bd2866 1px;
+  color: white;
+}
+.btn-danger:hover {
+  background: #db4081;
+  border: #db4081 1px;
+  color: white;
+}
+
+#navbar{
+  background: #001b2b;
+}
+
+.navbar .navbar-expand .navbar-dark .bg-dark{
+  background: #001b2b;
+}

@@ -13,6 +13,7 @@ function get(url) {
 }
 
 function post(url, body) {
+  console.log("post body :" + body);
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -22,6 +23,7 @@ function post(url, body) {
 }
 
 function put(url, body) {
+  console.log("Put");
   const requestOptions = {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -42,8 +44,8 @@ function _delete(url) {
 
 function handleResponse(response) {
   return response.text().then((text) => {
-    console.log("text" + text);
     const data = text && JSON.parse(text);
+    console.log("handleResponse : " + data);
     
 
     if (!response.ok) {

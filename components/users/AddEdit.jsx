@@ -6,10 +6,6 @@ import * as Yup from "yup";
 
 import { Link } from "../../components/Link";
 import { userService, alertService } from "../../services";
-import { apiUrl } from "../../config";
-
-import Image from "next/image";
-
 
 export { AddEdit };
 
@@ -21,7 +17,7 @@ function AddEdit(props) {
 
   // form validation rules
   const validationSchema = Yup.object().shape({
-    title: Yup.string().required("Title is required"),
+    
     firstname: Yup.string().required("Prénom requis"),
     lastname: Yup.string().required("Nom requis"),
     mail: Yup.string().email("Email invalide").required("Email est requis"),
@@ -34,7 +30,7 @@ function AddEdit(props) {
       .transform((x) => (x === "" ? undefined : x))
       .when("password", (password, schema) => {
         if (password || isAddMode)
-          return schema.required("Confirmer le mot de passe requis");
+          return schema.required("Vous devez Confirmer le mot de passe");
       })
       .oneOf([Yup.ref("password")], "Passwords must match"),
   });
@@ -51,11 +47,12 @@ function AddEdit(props) {
   const { errors } = formState;
 
   function onSubmit(data) {
-    return isAddMode ? createUser(data) : updateUser(user.usr_id, data);
-    
+    console.log(data);
+    return isAddMode ? createUser(data) : updateUser(user.id, data);
   }
 
   function createUser(data) {
+    console.log("create user : "+data);
     return userService
       .create(data)
       .then(() => {
@@ -79,18 +76,18 @@ function AddEdit(props) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>{isAddMode ? "Ajouter un utilisateur" : "Editer un utilisateur"}</h1>
       <div className="form-row">
-        <div className="form-group col">
-          
-            <div className="form-group col-2">
-              <Image
-                    // src={"http://linksforcitizens.local:3000/public/upload/images/avatar/unknown.png"}
-                    src={"/public/upload/images/avatar/" + {...register("avatar_img")}}
-                    alt="Avatar de l'utilisateur"
-                    width={30}
-                    height={30}
-                  />
-                  </div>
-          <div className="form-group col-2">
+      {isAddMode ? <></> : 
+        <div className="form-group col-2">
+          <img
+            src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
+            width={150}
+            height={150}
+            alt="Avatar de l'utilisateur"
+          />
+        </div>}
+      </div>
+      <div className="form-row">
+        <div className="form-group col-2">
           <label>Role</label>
           <select
             name="roles"
@@ -99,26 +96,9 @@ function AddEdit(props) {
           >
             <option value=""></option>
             <option value="Citoyen">Citoyen</option>
-            <option value="Adminastrateur">Adminastrateur</option>
+            <option value="Administrateur">Administrateur</option>
           </select>
           <div className="invalid-feedback">{errors.roles?.message}</div>
-          </div>
-        </div>
-        <div className="form-group col-5">
-          
-          
-          
-          <div className="invalid-feedback">{errors.mail?.message}</div>
-        </div>
-        <div className="form-group col-5">
-          <label>Prénom</label>
-          <input
-            name="firstname"
-            type="text"
-            {...register("firstname")}
-            className={`form-control ${errors.firstname ? "is-invalid" : ""}`}
-          />
-          <div className="invalid-feedback">{errors.firstname?.message}</div>
         </div>
         <div className="form-group col-5">
           <label>Nom</label>
@@ -130,9 +110,18 @@ function AddEdit(props) {
           />
           <div className="invalid-feedback">{errors.lastname?.message}</div>
         </div>
-      </div>
-      <div className="form-row">
-        <div className="form-group col-3">
+        <div className="form-group col-4">
+          <label>Prénom</label>
+          <input
+            name="firstname"
+            type="text"     
+
+            {...register("firstname")}
+            className={`form-control ${errors.firstname ? "is-invalid" : ""}`}
+          />
+          <div className="invalid-feedback">{errors.firstname?.message}</div>
+        </div>
+        {/* <div className="form-group col-2">
           <label>Téléphone</label>
           <input
             name="tel"
@@ -141,7 +130,7 @@ function AddEdit(props) {
             className={`form-control ${errors.tel ? "is-invalid" : ""}`}
           />
           <div className="invalid-feedback">{errors.tel?.message}</div>
-        </div>
+        </div> */}
         <div className="form-group col-5">
           <label>Email</label>
           <input
@@ -152,17 +141,7 @@ function AddEdit(props) {
           />
           <div className="invalid-feedback">{errors.mail?.message}</div>
         </div>
-        <div className="form-group col-5">
-          <label>Bio</label>
-          <input
-            name="bio"
-            type="text"
-            {...register("bio")}
-            className={`form-control ${errors.bio ? "is-invalid" : ""}`}
-          />
-          <div className="invalid-feedback">{errors.mail?.message}</div>
-        </div>
-        <div className="form-group col-5">
+        {/* <div className="form-group col-4">
           <label>Date de naissance</label>
           <input
             name="birth_date"
@@ -171,8 +150,21 @@ function AddEdit(props) {
             className={`form-control ${errors.birth_date ? "is-invalid" : ""}`}
           />
           <div className="invalid-feedback">{errors.birth_date?.message}</div>
-        </div>
+        </div>  */}
       </div>
+      <div className="form-row">
+        {/* <div className="form-group col-7" id="bio">
+          <label>Bio</label>
+          <input
+            name="bio"
+            type="text"
+            {...register("bio")}
+            className={`form-control ${errors.bio ? "is-invalid" : ""}`}
+          />
+          <div className="invalid-feedback">{errors.mail?.message}</div>
+        </div> */}
+      </div>
+
       {!isAddMode && (
         <div>
           <h3 className="pt-3">Changer le mode de passe</h3>
@@ -226,7 +218,7 @@ function AddEdit(props) {
         <button
           type="submit"
           disabled={formState.isSubmitting}
-          className="btn btn-primary mr-2"
+          className="btn btn-danger mr-2"
         >
           {formState.isSubmitting && (
             <span className="spinner-border spinner-border-sm mr-1"></span>

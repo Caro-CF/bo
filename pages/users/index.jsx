@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useState, useEffect } from "react";
 
 import { Link } from "../../components";
@@ -57,7 +56,12 @@ function Index() {
                     width={30}
                     height={30}
                   /> */}
-                  <img src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`} width={50} height={50} alt="Avatar de l'utilisateur" />
+                  <img
+                    src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
+                    width={50}
+                    height={50}
+                    alt="Avatar de l'utilisateur"
+                  />
                 </td>
                 <td>{user.pseudo}</td>
                 <td>{user.firstname}</td>

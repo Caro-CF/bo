@@ -21,6 +21,7 @@ function getById(id) {
 }
 
 function create(params) {
+  console.log('create param : ' + params);
   return fetchWrapper.post(baseUrl, params);
 }
 
