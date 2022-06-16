@@ -47,7 +47,7 @@ function AddEdit(props) {
 
   function onSubmit(data) {
     console.log("data " + console.table(data));
-    return isAddMode ? createUser(data) : updateUser(user.id, data);
+    return isAddMode ? createUser(data) : updateUser(data.usr_id, data);
     // return createUser2();
   }
 
@@ -62,37 +62,7 @@ function AddEdit(props) {
       .catch(alertService.error);
   }
 
-  async function createUser2(data) {
-    // POST request using fetch with async/await
-    console.log("data" + console.table(data));
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        pseudo: data.pseudo,
-        firstname: data.firstname,
-        lastname: data.lastname,
-        roles: data.roles,
-        mail: data.mail,
-        password: data.password,
-      }),
-    };
-    const response = await fetch(
-      "http://linksforcitizens.local:3000/api/users",
-      requestOptions
-    );
-    const datas = await response.json();
-    console.log("datas" + datas);
-    this.setState({
-      pseudo: datas.pseudo,
-      firstname: datas.firstname,
-      lastname: datas.lastname,
-      roles: datas.roles,
-      mail: datas.mail,
-      password: datas.password,
-    });
-  }
-
+  
   function updateUser(id, data) {
     return userService
       .update(id, data)

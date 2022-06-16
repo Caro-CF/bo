@@ -9,7 +9,7 @@ export const userService = {
   delete: _delete,
 };
 
-const baseUrl = `http://localhost:3000/api/users/`;
+const baseUrl = `http://localhost:3000/api/users`;
 // const baseUrl = `${apiUrl}/users`;
 
 function getAll() {
