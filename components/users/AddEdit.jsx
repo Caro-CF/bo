@@ -17,11 +17,10 @@ function AddEdit(props) {
 
   // form validation rules
   const validationSchema = Yup.object().shape({
-    
     firstname: Yup.string().required("Prénom requis"),
     lastname: Yup.string().required("Nom requis"),
     mail: Yup.string().email("Email invalide").required("Email est requis"),
-    role: Yup.string().required("Role requis"),
+    roles: Yup.string().required("Role requis"),
     password: Yup.string()
       .transform((x) => (x === "" ? undefined : x))
       .concat(isAddMode ? Yup.string().required("Mot de passe requis") : null)
@@ -47,19 +46,51 @@ function AddEdit(props) {
   const { errors } = formState;
 
   function onSubmit(data) {
-    console.log(data);
+    console.log("data " + console.table(data));
     return isAddMode ? createUser(data) : updateUser(user.id, data);
+    // return createUser2();
   }
 
   function createUser(data) {
-    console.log("create user : "+data);
+    console.log("create user : " + data);
     return userService
       .create(data)
       .then(() => {
-        alertService.success("User added", { keepAfterRouteChange: true });
+        alertService.success("Utilisateur ajouté", { keepAfterRouteChange: true });
         router.push(".");
       })
       .catch(alertService.error);
+  }
+
+  async function createUser2(data) {
+    // POST request using fetch with async/await
+    console.log("data" + console.table(data));
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        pseudo: data.pseudo,
+        firstname: data.firstname,
+        lastname: data.lastname,
+        roles: data.roles,
+        mail: data.mail,
+        password: data.password,
+      }),
+    };
+    const response = await fetch(
+      "http://linksforcitizens.local:3000/api/users",
+      requestOptions
+    );
+    const datas = await response.json();
+    console.log("datas" + datas);
+    this.setState({
+      pseudo: datas.pseudo,
+      firstname: datas.firstname,
+      lastname: datas.lastname,
+      roles: datas.roles,
+      mail: datas.mail,
+      password: datas.password,
+    });
   }
 
   function updateUser(id, data) {
@@ -76,15 +107,18 @@ function AddEdit(props) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>{isAddMode ? "Ajouter un utilisateur" : "Editer un utilisateur"}</h1>
       <div className="form-row">
-      {isAddMode ? <></> : 
-        <div className="form-group col-2">
-          <img
-            src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
-            width={150}
-            height={150}
-            alt="Avatar de l'utilisateur"
-          />
-        </div>}
+        {isAddMode ? (
+          <></>
+        ) : (
+          <div className="form-group col-2">
+            <img
+              src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
+              width={150}
+              height={150}
+              alt="Avatar de l'utilisateur"
+            />
+          </div>
+        )}
       </div>
       <div className="form-row">
         <div className="form-group col-2">
@@ -114,8 +148,7 @@ function AddEdit(props) {
           <label>Prénom</label>
           <input
             name="firstname"
-            type="text"     
-
+            type="text"
             {...register("firstname")}
             className={`form-control ${errors.firstname ? "is-invalid" : ""}`}
           />
