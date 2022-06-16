@@ -32,7 +32,7 @@ function AddEdit(props) {
         if (password || isAddMode)
           return schema.required("Vous devez Confirmer le mot de passe");
       })
-      .oneOf([Yup.ref("password")], "Passwords must match"),
+      .oneOf([Yup.ref("password")], "Les mots de passes doivent correspondrent"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -68,7 +68,7 @@ function AddEdit(props) {
     return userService
       .update(id, data)
       .then(() => {
-        alertService.success("User updated", { keepAfterRouteChange: true });
+        alertService.success("Utilisateur mis à jour", { keepAfterRouteChange: true });
         router.push("..");
       })
       .catch(alertService.error);
