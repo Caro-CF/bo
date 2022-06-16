@@ -17,6 +17,7 @@ function AddEdit(props) {
 
   // form validation rules
   const validationSchema = Yup.object().shape({
+    pseudo: Yup.string().required("Pseudo requis"),
     firstname: Yup.string().required("Prénom requis"),
     lastname: Yup.string().required("Nom requis"),
     mail: Yup.string().email("Email invalide").required("Email est requis"),
@@ -103,6 +104,16 @@ function AddEdit(props) {
             <option value="Administrateur">Administrateur</option>
           </select>
           <div className="invalid-feedback">{errors.roles?.message}</div>
+        </div>
+        <div className="form-group col-5">
+          <label>Pseudo</label>
+          <input
+            name="pseudo"
+            type="text"
+            {...register("pseudo")}
+            className={`form-control ${errors.pseudo ? "is-invalid" : ""}`}
+          />
+          <div className="invalid-feedback">{errors.pseudo?.message}</div>
         </div>
         <div className="form-group col-5">
           <label>Nom</label>
