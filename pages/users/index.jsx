@@ -28,19 +28,6 @@ function Index() {
 
     
   }
-  // function deleteUser(id) {
-  //   setUsers(
-  //     users.map((x) => {
-  //       if (x.id === id) {
-  //         x.isDeleting = true;
-  //       }
-  //       return x;
-  //     })
-  //   );
-  //   userService.delete(id).then(() => {
-  //     setUsers((users) => users.filter((x) => x.id !== id));
-  //   });
-  // }
 
   return (
     <div>
@@ -65,13 +52,6 @@ function Index() {
             users.map((user) => (
               <tr key={user.usr_id}>
                 <td>
-                  {/* <Image
-                    src={"/public/upload/images/avatar/" + user.avatar_img}
-                    // src={"/public/upload/images/avatar/" + user.avatar_img}
-                    alt="Avatar de l'utilisateur"
-                    width={30}
-                    height={30}
-                  /> */}
                   <img
                     src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
                     width={50}
@@ -125,56 +105,3 @@ function Index() {
     </div>
   );
 }
-
-// import { apiUrl } from 'config';
-
-// function UserList({ data }) {
-//   return (
-//     <>
-//       <div>
-//         <form
-//           action="`${apiUrl}/users`"
-//           method="post"
-//         >
-//           <label htlmfor={data.firstname}>First name:</label>
-//           <input type="text" id="first" name="first" />
-//           <label htlmfor={data.mail}>mail:</label>
-//           <input type="text" id="mail" name="mail" />
-//           <button type="submit">Submit</button>
-//         </form>
-//       </div>
-
-//       <ul>
-//         {data.map((data) => (
-//           <li key={data.usr_id}>
-//             {data.firstname} &nbsp;{data.mail}
-//             <button type="submit">Modifier</button>&nbsp;
-//             <button type="submit">Supprimer</button>
-//           </li>
-//         ))}
-//       </ul>
-//     </>
-//   );
-// }
-
-// // This gets called on every request
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`${apiUrl}/users`);
-//   const data = await res.json();
-//   console.log(data);
-//   //   const option = {
-//   //     method: "POST",
-//   //     headers: { "Content-Type": "application/json" },
-//   //     body: JSON.stringify({ data }),
-//   //   };
-
-//   //   const response = await fetch(res, option);
-//   //   const responseJson = await response.json();
-//   //   console.log(responseJson);
-
-//   // Pass data to the page via props
-//   return { props: { data } };
-// }
-
-// export default UserList;
