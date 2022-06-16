@@ -23,8 +23,24 @@ function Index() {
     );
     userService.delete(id).then(() => {
       setUsers((users) => users.filter((x) => x.id !== id));
+      userService.getAll().then((x) => setUsers(x));
     });
+
+    
   }
+  // function deleteUser(id) {
+  //   setUsers(
+  //     users.map((x) => {
+  //       if (x.id === id) {
+  //         x.isDeleting = true;
+  //       }
+  //       return x;
+  //     })
+  //   );
+  //   userService.delete(id).then(() => {
+  //     setUsers((users) => users.filter((x) => x.id !== id));
+  //   });
+  // }
 
   return (
     <div>

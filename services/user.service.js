@@ -21,7 +21,6 @@ function getById(id) {
 }
 
 function create(params) {
-  console.log('create param : ' + params);
   return fetchWrapper.post(baseUrl, params);
 }
 
@@ -32,4 +31,5 @@ function update(id, params) {
 // prefixed with underscored because delete is a reserved word in javascript
 function _delete(id) {
   return fetchWrapper.delete(`${baseUrl}/${id}`);
+  
 }

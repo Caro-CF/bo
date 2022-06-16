@@ -13,8 +13,6 @@ function get(url) {
 }
 
 function post(url, body) {
-  console.log("post body :" + body);
-  console.log("Url Post : " + url);
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },

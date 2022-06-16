@@ -42,8 +42,8 @@ function create({ firstname, lastname, mail, password, roles }) {
   saveData();
 }
 
-function update(id, { title, firstName, lastName, email, role, password }) {
-  const params = { title, firstName, lastName, email, role, password };
+function update(id, { pseudo, firstName, lastName, email, role, password }) {
+  const params = { pseudo, firstName, lastName, email, role, password };
   const user = users.find((x) => x.id.toString() === id.toString());
 
   // validate
