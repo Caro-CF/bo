@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from "react-bootstrap";
 import { userService } from "services";
+import { useRouter } from "next/router";
 
 export default function InfoModal(props) {
   const [show, setShow] = useState(false);
   const id = props.id;
+  //   const dis ="user";
   const dis = props.disabled;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const router = useRouter();
 
   //   suppression Utilisateur
   const [users, setUsers] = useState(null);
@@ -26,12 +29,16 @@ export default function InfoModal(props) {
         return x;
       })
     );
+
     userService.delete(id).then(() => {
       setUsers((users) => users.filter((x) => x.id !== id));
       userService.getAll().then((x) => setUsers(x));
+      router.reload(window.location.pathname);
     });
+
+
     handleClose();
-    setUsers();
+    
   }
 
   return (
@@ -47,7 +54,9 @@ export default function InfoModal(props) {
         <Modal.Header closeButton>
           <Modal.Title>Supprimer</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Voulez vous supprimer cet id {id} {props.element} ?</Modal.Body>
+        <Modal.Body>
+          Voulez vous supprimer cet id {id} {props.element} dis {dis} ?
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Annuler
@@ -55,14 +64,14 @@ export default function InfoModal(props) {
           <Button
             variant="primary"
             onClick={() => deleteUser(id)}
-            disabled={dis.isDeleting}
+            // disabled={dis.isDeleting}
           >
-            {dis.isDeleting ? (
-                
+            {/* {dis.isDeleting ? (
                       <span className="spinner-border spinner-border-sm"></span>
+
                     ) : (
                       <span>Supprimer</span>
-                    )}
+                    )} */}
           </Button>
         </Modal.Footer>
       </Modal>

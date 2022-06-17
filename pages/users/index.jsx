@@ -2,22 +2,23 @@ import { useState, useEffect } from "react";
 
 import { Link } from "../../components";
 import { userService } from "../../services";
-import { LoadModal } from "components/LoadModal";
 import InfoModal from "components/InfoModal";
-
+import { func } from "prop-types";
 
 export default Index;
 
-
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+const handleClose = () => setShow(false);
+const handleShow = () => setShow(true);
 function Index() {
   const [users, setUsers] = useState(null);
 
   useEffect(() => {
     userService.getAll().then((x) => setUsers(x));
   }, []);
+
+  function reload() {
+    userService.getAll().then((x) => setUsers(x));
+  }
 
   function deleteUser(id) {
     setUsers(
@@ -33,9 +34,7 @@ function Index() {
       userService.getAll().then((x) => setUsers(x));
     });
 
-    
 
-    
   }
 
   return (
@@ -81,8 +80,15 @@ function Index() {
                   >
                     Edition
                   </Link>
-                  <InfoModal element ="utilisateur" id ={user.usr_id} disabled="user" />
-                  
+                  <InfoModal
+                    element="utilisateur"
+                    id={user.usr_id}
+                    disabled="user"
+                    
+                  >
+                    
+                  </InfoModal>
+
                   {/* <button
                     onClick={() => deleteUser(user.usr_id)}
                     className="btn btn-sm btn-danger btn-delete-user"
