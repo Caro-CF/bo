@@ -6,6 +6,7 @@ import { userService } from "services";
 export default function InfoModal(props) {
   const [show, setShow] = useState(false);
   const id = props.id;
+  const dis = props.disabled;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -29,6 +30,8 @@ export default function InfoModal(props) {
       setUsers((users) => users.filter((x) => x.id !== id));
       userService.getAll().then((x) => setUsers(x));
     });
+    handleClose();
+    setUsers();
   }
 
   return (
@@ -52,9 +55,14 @@ export default function InfoModal(props) {
           <Button
             variant="primary"
             onClick={() => deleteUser(id)}
-            // disabled={props.disabled}
+            disabled={dis.isDeleting}
           >
-            Supprimer
+            {dis.isDeleting ? (
+                
+                      <span className="spinner-border spinner-border-sm"></span>
+                    ) : (
+                      <span>Supprimer</span>
+                    )}
           </Button>
         </Modal.Footer>
       </Modal>
