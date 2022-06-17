@@ -81,9 +81,9 @@ function Index() {
                   >
                     Edition
                   </Link>
-                  <InfoModal />
+                  <InfoModal element ="utilisateur" id ={user.usr_id} disabled="user.isDeleting" />
                   
-                  <button
+                  {/* <button
                     onClick={() => deleteUser(user.usr_id)}
                     className="btn btn-sm btn-danger btn-delete-user"
                     disabled={user.isDeleting}
@@ -93,7 +93,7 @@ function Index() {
                     ) : (
                       <span>Supprimer</span>
                     )}
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))}
