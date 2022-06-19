@@ -6,10 +6,11 @@ export default Home;
 
 function Home() {
   return (
-    <Container id="containter">
-      <h1>Bienvenue dans l'espace d'administration de ressources citoyrenne</h1>
+    <div id="containter">
+      
 
-      <Card id="card">
+      <Card id="card" className="d-flex justify-content-center">
+        <Card.Title className="mb-4 ml-4"><h1>Bienvenue dans l'espace d'administration de ressources citoyrenne</h1></Card.Title>
         <Card.Body>
         <Form>
             
@@ -34,6 +35,6 @@ function Home() {
         </Card.Body>
         
       </Card>
-    </Container>
+    </div>
   );
 }
