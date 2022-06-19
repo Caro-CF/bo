@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 //import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, CloseButton } from "react-bootstrap";
 import { userService } from "services";
 import { useRouter } from "next/router";
 

@@ -72,3 +72,9 @@ img {
 .navbar .navbar-expand .navbar-dark .bg-dark{
   background: #001b2b;
 }
+
+#card{
+  width: 45rem;
+  /* display: flex;
+  justify-content: center; */
+}

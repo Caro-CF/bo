@@ -1,14 +1,39 @@
-import { Link } from '../components';
+import Head from "next/head";
+import { Link } from "../components";
+import { Form, Button, Container, Card } from "react-bootstrap";
 
 export default Home;
 
 function Home() {
-    return (
-        <div>
-            <h1>Bienvenue dans l'espace d'administration de ressources citoyrenne</h1>
+  return (
+    <Container id="containter">
+      <h1>Bienvenue dans l'espace d'administration de ressources citoyrenne</h1>
+
+      <Card id="card">
+        <Card.Body>
+        <Form>
             
-            <p>An example app showing how to list, add, edit and delete user records with Next.js 10 and the React Hook Form library.</p>
-            <p><Link href="/users">&gt;&gt; Manage Users</Link></p>
-        </div>
-    );
+          <Form.Group className="mb-4" controlId="formBasicEmail">
+            <Form.Label>Adresse e-mail</Form.Label>
+            <Form.Control type="email" placeholder="Entrer email" />
+            <Form.Text className="text-muted">
+              Ne partager jamais vos accès
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Group className="mb-4" controlId="formBasicPassword">
+            <Form.Label>Mot de passe</Form.Label>
+            <Form.Control type="password" placeholder="Entrer mot de passe" />
+          </Form.Group>
+          
+
+          <Button variant="success" type="submit">
+            Connexion
+          </Button>
+        </Form>
+        </Card.Body>
+        
+      </Card>
+    </Container>
+  );
 }
