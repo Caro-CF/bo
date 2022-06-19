@@ -84,9 +84,7 @@ function Index() {
                     element="utilisateur"
                     id={user.usr_id}
                     disabled="user"
-                    
                   >
-                    
                   </InfoModal>
 
                   {/* <button

@@ -52,10 +52,10 @@ export default function InfoModal(props) {
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Supprimer</Modal.Title>
+          <Modal.Title>Supprimer un {props.element} </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Voulez vous supprimer cet id {id} {props.element} dis {dis} ?
+          Voulez vous supprimer cet {props.element} ?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -64,14 +64,8 @@ export default function InfoModal(props) {
           <Button
             variant="primary"
             onClick={() => deleteUser(id)}
-            // disabled={dis.isDeleting}
           >
-            {/* {dis.isDeleting ? (
-                      <span className="spinner-border spinner-border-sm"></span>
-
-                    ) : (
-                      <span>Supprimer</span>
-                    )} */}
+            Supprimer
           </Button>
         </Modal.Footer>
       </Modal>
