@@ -10,7 +10,7 @@ function Home() {
       
 
       <Card id="card" className="d-flex justify-content-center">
-        <Card.Title className="mb-4 ml-4"><h1>Bienvenue dans l'espace d'administration de ressources citoyrenne</h1></Card.Title>
+        <Card.Title className="mb-4 ml-4"><h1>Bienvenue dans l'espace d'administration de ressources citoyenne</h1></Card.Title>
         <Card.Body>
         <Form>
             

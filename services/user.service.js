@@ -1,16 +1,67 @@
-import { apiUrl } from "../config";
+import { BehaviorSubject } from 'rxjs';
+import getConfig from 'next/config';
+import Router from 'next/router';
+
+
 import { fetchWrapper } from "../helpers/fetch-wrapper";
 
-export const userService = {
-  getAll,
-  getById,
-  create,
-  update,
-  delete: _delete,
-};
-
+const { publicRuntimeConfig } = getConfig();
 const baseUrl = `http://localhost:3000/api/users`;
 // const baseUrl = `${apiUrl}/users`;
+const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
+
+export const userService = {
+  user: userSubject.asObservable(),
+    get userValue () { return userSubject.value },
+    login,
+    logout,
+    // register,
+    getAll,
+    getById,
+    update,
+    delete: _delete
+};
+
+// function login(mail, password) {
+//   return fetchWrapper.post(`${baseUrl}/api/users/login`, { mail, password })
+//   .then((res) => {
+//     if (res.data.errors) {
+//       mailError.innerHTML = res.data.errors.email;
+//       passwordError.innerHTML = res.data.errors.password;
+//     } else {
+//       window.location = "/";
+//       localStorage.setItem("token", res.data.acces_token);
+//       localStorage.setItem("User", JSON.stringify(res.data.user));
+//       // console.log(res.data.acces_token);
+//     }
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//     alert("Email ou mot de passe incorrect");
+//   });
+// }
+
+function login(mail, password) {
+  return fetchWrapper.post(`${baseUrl}/api/users/login`, { mail, password })
+      .then(user => {
+          // publish user to subscribers and store in local storage to stay logged in between page refreshes
+          userSubject.next(user);
+          localStorage.setItem('user', JSON.stringify(user));
+
+          return user;
+      });
+}
+
+function logout() {
+  // remove user from local storage, publish null to user subscribers and redirect to login page
+  localStorage.removeItem('user');
+  userSubject.next(null);
+  Router.push('${baseUrl}/api/users/login');
+}
+
+// function register(user) {
+//   return fetchWrapper.post(`${baseUrl}/register`, user);
+// }
 
 function getAll() {
   return fetchWrapper.get(baseUrl);
@@ -24,8 +75,24 @@ function create(params) {
   return fetchWrapper.post(baseUrl, params);
 }
 
+// function update(id, params) {
+//   return fetchWrapper.put(`${baseUrl}/${id}`, params);
+// }
+
 function update(id, params) {
-  return fetchWrapper.put(`${baseUrl}/${id}`, params);
+  return fetchWrapper.put(`${baseUrl}/${id}`, params)
+      .then(x => {
+          // update stored user if the logged in user updated their own record
+          if (id === userSubject.value.id) {
+              // update local storage
+              const user = { ...userSubject.value, ...params };
+              localStorage.setItem('user', JSON.stringify(user));
+
+              // publish updated user to subscribers
+              userSubject.next(user);
+          }
+          return x;
+      });
 }
 
 // prefixed with underscored because delete is a reserved word in javascript
