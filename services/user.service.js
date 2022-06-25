@@ -3,6 +3,7 @@ import getConfig from "next/config";
 import Router from "next/router";
 
 import { fetchWrapper } from "../helpers/fetch-wrapper";
+import { alertService } from "./alert.service";
 
 const { publicRuntimeConfig } = getConfig();
 // const baseUrl = `http://localhost:3000/api/users`;
@@ -39,7 +40,10 @@ function login(mail, password) {
         // il faut annuler le localstorage ou le redirect en cas de pas admin
       } else {
         console.log("Autre");
-        return { message: `Vous n'êtes pas un administrateur` }; 
+        logout();
+        
+        return alertService.error("Vous n'êtes pas administrateur"); 
+        
       }
     });
 }
