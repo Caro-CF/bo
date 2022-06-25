@@ -54,8 +54,7 @@ function AddEdit(props) {
 
   function createUser(data) {
     console.log("create user : " + data);
-    return userService
-      .create(data)
+    return userService.register(data)
       .then(() => {
         alertService.success("Utilisateur ajouté", { keepAfterRouteChange: true });
         router.push(".");
@@ -75,7 +74,7 @@ function AddEdit(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="m-5">
       <h1>{isAddMode ? "Ajouter un utilisateur" : "Editer un utilisateur"}</h1>
       <div className="form-row">
         {isAddMode ? (

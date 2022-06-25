@@ -20,7 +20,7 @@ export const userService = {
   },
   login,
   logout,
-  // register,
+  register,
   getAll,
   getById,
   update,
@@ -39,11 +39,9 @@ function login(mail, password) {
         return user;
         // il faut annuler le localstorage ou le redirect en cas de pas admin
       } else {
-        console.log("Autre");
+        console.log("Pas administrateur");
         logout();
-        
-        return alertService.error("Vous n'êtes pas administrateur"); 
-        
+        return alertService.error("Vous n'êtes pas administrateur")
       }
     });
 }
@@ -87,6 +85,10 @@ function getById(id) {
 
 function create(params) {
   return fetchWrapper.post(baseUrl, params);
+}
+
+function register(user) {
+  return fetchWrapper.post(`${baseUrl}`, user);
 }
 
 // function update(id, params) {
