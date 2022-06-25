@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Link } from "../components";
 import { Form, Button, Container, Card } from "react-bootstrap";
 
+
 export default Home;
 
 function Home() {

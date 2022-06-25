@@ -6,8 +6,9 @@ import Router from 'next/router';
 import { fetchWrapper } from "../helpers/fetch-wrapper";
 
 const { publicRuntimeConfig } = getConfig();
-const baseUrl = `http://localhost:3000/api/users`;
-// const baseUrl = `${apiUrl}/users`;
+// const baseUrl = `http://localhost:3000/api/users`;
+const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
+
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 export const userService = {
@@ -42,7 +43,9 @@ export const userService = {
 // }
 
 function login(mail, password) {
-  return fetchWrapper.post(`${baseUrl}/api/users/login`, { mail, password })
+  
+  
+  return fetchWrapper.post(`${baseUrl}/login`, { mail, password })
       .then(user => {
           // publish user to subscribers and store in local storage to stay logged in between page refreshes
           userSubject.next(user);
@@ -50,6 +53,25 @@ function login(mail, password) {
 
           return user;
       });
+}
+
+async function fetchToken(){
+  
+  const token = localStorage.setItem("token");
+  console.log(token);
+  // const uid = JSON.parse(localStorage.getItem('User')).usr_id;
+ 
+  const requestOptions = {
+      method: "get",
+      headers: {
+          authorization: `Bearer ${token}`,
+        },
+    };
+    return fetch(`${baseUrl}/me`, requestOptions).then((res) => {
+      const uid = JSON.parse(res);
+      console.log(uid);
+    })
+    .catch((err) => console.log("No token"));
 }
 
 function logout() {

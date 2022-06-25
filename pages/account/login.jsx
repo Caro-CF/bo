@@ -24,9 +24,9 @@ function Login() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  function onSubmit({ username, password }) {
+  function onSubmit({ mail, password }) {
     return userService
-      .login(username, password)
+      .login(mail, password)
       .then(() => {
         // get return url from query parameters or default to '/'
         const returnUrl = router.query.returnUrl || "/";
@@ -52,9 +52,7 @@ function Login() {
                 name="mail"
                 type="text"
                 {...register("mail")}
-                className={`form-control ${
-                  errors.mail ? "is-invalid" : ""
-                }`}
+                className={`form-control ${errors.mail ? "is-invalid" : ""}`}
               />
               <div className="invalid-feedback">{errors.mail?.message}</div>
             </Form.Group>
@@ -69,7 +67,11 @@ function Login() {
                 }`}
               />
               <div className="invalid-feedback">{errors.password?.message}</div>
+              <Form.Text className="text-muted">
+                Ne partagez jamais vos identifiants
+              </Form.Text>
             </Form.Group>
+
             <button
               disabled={formState.isSubmitting}
               className="btn btn-primary"

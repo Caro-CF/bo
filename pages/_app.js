@@ -13,6 +13,7 @@ function App({ Component, pageProps }) {
     const router = useRouter();
     const [user, setUser] = useState(null);
     const [authorized, setAuthorized] = useState(false);
+   
 
     useEffect(() => {
         // on initial load - run auth check 
@@ -50,10 +51,13 @@ function App({ Component, pageProps }) {
         }
     }
 
+    
+   
+
     return (
         <>
             <Head>
-                <title>Next.js 11 - User Registration and Login Example</title>
+                <title>Administration de ressources nationnales</title>
                 
                 {/* eslint-disable-next-line @next/next/no-css-tags */}
                 <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
