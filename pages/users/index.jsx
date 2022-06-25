@@ -38,7 +38,7 @@ function Index() {
   }
 
   return (
-    <div>
+    <div className="m-5">
       <h1>Utilisateurs</h1>
       <Link href="/users/add" className="btn btn-sm btn-success mb-2">
         Ajouter un utilisateur

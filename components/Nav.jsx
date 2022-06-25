@@ -33,10 +33,10 @@ function Nav() {
           Home
         </NavLink>
         <NavLink href="/users" className="nav-item nav-link">
-          Users
+          Utilisateurs
         </NavLink>
         <a onClick={logout} className="nav-item nav-link">
-          Logout
+          Déconnexion
         </a>
       </div>
     </nav>

@@ -1,41 +1,29 @@
 import Head from "next/head";
+import { useEffect } from "react";
+import { useState } from "react";
+import { userService } from "services";
 import { Link } from "../components";
-import { Form, Button, Container, Card } from "react-bootstrap";
 
 
 export default Home;
 
 function Home() {
+  // const [users, setUsers] = useState(null);
+
+  // useEffect(() => {
+  //   userService.getById(user.usr_id).then((x) => setUsers(x));
+  // }, []);
+  const user = JSON.parse(localStorage.getItem("user"));
+  
+  console.table(user);
+  
   return (
-    <div id="containter">
+    
+    <div id="containter" className="m-5"> 
       
-
-      <Card id="card" className="d-flex justify-content-center">
-        <Card.Title className="mb-4 ml-4"><h1>Bienvenue dans l'espace d'administration de ressources citoyenne</h1></Card.Title>
-        <Card.Body>
-        <Form>
-            
-          <Form.Group className="mb-4" controlId="formBasicEmail">
-            <Form.Label>Adresse e-mail</Form.Label>
-            <Form.Control type="email" placeholder="Entrer email" />
-            <Form.Text className="text-muted">
-              Ne partager jamais vos accès
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group className="mb-4" controlId="formBasicPassword">
-            <Form.Label>Mot de passe</Form.Label>
-            <Form.Control type="password" placeholder="Entrer mot de passe" />
-          </Form.Group>
-          
-
-          <Button variant="success" type="submit">
-            Connexion
-          </Button>
-        </Form>
-        </Card.Body>
-        
-      </Card>
+      <div>Bienvenue {user.user.firstanme} {user.user.lastname}</div>
+      
+      <Link href="/users"> - Accéder à la liste des utilisateur</Link>
     </div>
   );
 }
