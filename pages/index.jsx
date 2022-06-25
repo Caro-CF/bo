@@ -8,11 +8,7 @@ import { Link } from "../components";
 export default Home;
 
 function Home() {
-  // const [users, setUsers] = useState(null);
-
-  // useEffect(() => {
-  //   userService.getById(user.usr_id).then((x) => setUsers(x));
-  // }, []);
+ 
   const user = JSON.parse(localStorage.getItem("user"));
   
   console.table(user);
