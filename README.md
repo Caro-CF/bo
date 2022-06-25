@@ -3,7 +3,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Ressources Nationales
 
 Projet réalisé dans le cadre du CESI (Projet CUBES)
-Réalisé avec next.js, bootstrap, react hook, jsx.
+Stack next.js, bootstrap, react hook, jsx.
+API : http://linksforcitizens.local/3000
 
 ## Getting Started
 
