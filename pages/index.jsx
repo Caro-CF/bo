@@ -17,9 +17,14 @@ function Home() {
     
     <div id="containter" className="m-5"> 
       
-      <div>Bienvenue {user.user.firstanme} {user.user.lastname}</div>
+      <h2>Bienvenue {user.user.firstname} {user.user.lastname}</h2>
+
+      <ul>
+        <li><Link href="/users">Accéder à la liste des utilisateur</Link></li>
+        {/* <li><Link href="/stats">Accéder à la liste des utilisateur</Link></li> */}
+      </ul>
       
-      <Link href="/users"> - Accéder à la liste des utilisateur</Link>
+      
     </div>
   );
 }
