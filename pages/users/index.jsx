@@ -4,6 +4,7 @@ import { Link } from "../../components";
 import { userService } from "../../services";
 import InfoModal from "components/InfoModal";
 import { func } from "prop-types";
+import { Search } from "components/Search";
 
 export default Index;
 
@@ -33,8 +34,6 @@ function Index() {
       setUsers((users) => users.filter((x) => x.id !== id));
       userService.getAll().then((x) => setUsers(x));
     });
-
-
   }
 
   return (
@@ -43,6 +42,7 @@ function Index() {
       <Link href="/users/add" className="btn btn-sm btn-success mb-2">
         Ajouter un utilisateur
       </Link>
+      <Search />
       <table className="table table-striped">
         <thead>
           <tr>
@@ -84,8 +84,7 @@ function Index() {
                     element="utilisateur"
                     id={user.usr_id}
                     disabled="user"
-                  >
-                  </InfoModal>
+                  ></InfoModal>
 
                   {/* <button
                     onClick={() => deleteUser(user.usr_id)}

@@ -39,7 +39,7 @@ function Nav() {
         <a onClick={logout} className="nav-item nav-link">
           Déconnexion
         </a>
-        <Search></Search>
+        
       </div>
     </nav>
   );

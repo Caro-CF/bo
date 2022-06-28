@@ -12,7 +12,7 @@ function Home() {
  
   const user = JSON.parse(localStorage.getItem("user"));
   
-  console.table(user);
+  // console.table(user);
   
   return (
     
@@ -22,6 +22,7 @@ function Home() {
 
       <ul>
         <li><Link href="/users">Accéder à la liste des utilisateurs</Link></li>
+        {/* <li><Link href="/posts">Accéder à la liste des posts</Link></li> */}
         {/* <li><Link href="/stats">Accéder à la liste des utilisateur</Link></li> */}
       </ul>
       
