@@ -1,3 +1,4 @@
+import { Search } from "components/Search";
 import Head from "next/head";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -20,11 +21,11 @@ function Home() {
       <h2>Bienvenue {user.user.firstname} {user.user.lastname}</h2>
 
       <ul>
-        <li><Link href="/users">Accéder à la liste des utilisateur</Link></li>
+        <li><Link href="/users">Accéder à la liste des utilisateurs</Link></li>
         {/* <li><Link href="/stats">Accéder à la liste des utilisateur</Link></li> */}
       </ul>
       
-      
+      <Search />
     </div>
   );
 }

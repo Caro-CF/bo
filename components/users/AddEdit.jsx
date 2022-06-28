@@ -100,6 +100,7 @@ function AddEdit(props) {
           >
             <option value=""></option>
             <option value="Citoyen">Citoyen</option>
+            <option value="Moderateur">Moderateur</option>
             <option value="Administrateur">Administrateur</option>
           </select>
           <div className="invalid-feedback">{errors.roles?.message}</div>

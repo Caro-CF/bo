@@ -34,14 +34,17 @@ function login(mail, password) {
       // publish user to subscribers and store in local storage to stay logged in between page refreshes
       userSubject.next(user);
       localStorage.setItem("user", JSON.stringify(user));
-      if (user.user.roles === "Administrateur") {
+      if (
+        user.user.roles === "Administrateur" ||
+        user.user.roles === "Moderateur"
+      ) {
         console.log("admin");
         return user;
         // il faut annuler le localstorage ou le redirect en cas de pas admin
       } else {
         console.log("Pas administrateur");
         logout();
-        return alertService.error("Vous n'êtes pas administrateur")
+        return alertService.error("Vous n'êtes pas administrateur");
       }
     });
 }
