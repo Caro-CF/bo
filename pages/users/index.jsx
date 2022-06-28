@@ -4,7 +4,6 @@ import { Link } from "../../components";
 import { userService } from "../../services";
 import InfoModal from "components/InfoModal";
 import { func } from "prop-types";
-import { Search } from "components/Search";
 
 export default Index;
 
@@ -12,6 +11,8 @@ const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
 function Index() {
   const [users, setUsers] = useState(null);
+// search
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     userService.getAll().then((x) => setUsers(x));
@@ -39,10 +40,16 @@ function Index() {
   return (
     <div className="m-5">
       <h1>Utilisateurs</h1>
+      {/* Search */}
+      <input
+        className="search"
+        placeholder="Search..."
+        onChange={(e) => setQuery(e.target.value.toLowerCase())}
+      />
       <Link href="/users/add" className="btn btn-sm btn-success mb-2">
         Ajouter un utilisateur
       </Link>
-      <Search />
+      
       <table className="table table-striped">
         <thead>
           <tr>
@@ -57,7 +64,8 @@ function Index() {
         </thead>
         <tbody>
           {users &&
-            users.map((user) => (
+            users.filter((search) => search.firstname.toLowerCase().includes(query))
+            .map((user) => (
               <tr key={user.usr_id}>
                 <td>
                   <img

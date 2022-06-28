@@ -5,7 +5,7 @@ import { userService } from "services";
 
 import Image from "next/image";
 import mypic from "../public/images/l4c.png";
-import { Search } from "./Search";
+
 
 export { Nav };
 
