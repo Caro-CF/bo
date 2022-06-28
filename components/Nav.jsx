@@ -31,7 +31,7 @@ function Nav() {
       </div>
       <div className="navbar-nav">
         <NavLink href="/" exact className="nav-item nav-link">
-          Home
+          Accueil
         </NavLink>
         <NavLink href="/users" className="nav-item nav-link">
           Utilisateurs
