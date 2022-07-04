@@ -36,6 +36,9 @@ function Nav() {
         <NavLink href="/users" className="nav-item nav-link">
           Utilisateurs
         </NavLink>
+        <NavLink href="/ressources" className="nav-item nav-link">
+          Ressources
+        </NavLink>
         <a onClick={logout} className="nav-item nav-link">
           Déconnexion
         </a>
