@@ -7,9 +7,9 @@ import { func } from "prop-types";
 
 export default Index;
 
-const handleClose = () => setShow(false);
-const handleShow = () => setShow(true);
 function Index() {
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [users, setUsers] = useState(null);
   // search
   const [query, setQuery] = useState("");
@@ -19,7 +19,7 @@ function Index() {
   }, []);
 
   function reload() {
-    userService.getAll().then((x) => setUsers(x));
+    userService.getById().then((x) => setUsers(x));
   }
 
   function deleteUser(id) {
@@ -41,7 +41,7 @@ function Index() {
     <div className="m-5">
       <h1>Utilisateurs</h1>
       {/* Search */}
-      
+
       <Link href="/users/add" className="btn btn-sm btn-success mb-2">
         Ajouter un utilisateur
       </Link>
@@ -73,7 +73,7 @@ function Index() {
                   search.lastname.toLowerCase().includes(query) ||
                   search.roles.toLowerCase().includes(query) ||
                   search.mail.toLowerCase().includes(query) ||
-                  search.pseudo.toLowerCase().includes(query) 
+                  search.pseudo.toLowerCase().includes(query)
               )
               .map((user) => (
                 <tr key={user.usr_id}>
