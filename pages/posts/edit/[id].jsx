@@ -1,12 +1,12 @@
 import { AddEdit } from "../../../components/users/AddEdit";
-import { userService } from "../../../services";
+import { postService } from "services/post.service";
 
 export default AddEdit;
 
 export async function getServerSideProps({ params }) {
-  const user = await userService.getById(params.id);
+  const post = await postService.getById(params.id);
 
   return {
-    props: { user },
+    props: { post },
   };
 }

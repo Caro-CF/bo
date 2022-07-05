@@ -25,7 +25,7 @@ function AddEdit(props) {
     password: Yup.string()
       .transform((x) => (x === "" ? undefined : x))
       .concat(isAddMode ? Yup.string().required("Mot de passe requis") : null)
-      .min(6, "Le mot de passe doit au moins 6 caractères"),
+      .min(6, "Le mot de passe doit avoir au moins 6 caractères"),
     confirmPassword: Yup.string()
       .transform((x) => (x === "" ? undefined : x))
       .when("password", (password, schema) => {

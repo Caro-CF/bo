@@ -88,7 +88,7 @@ function Index() {
                   <td>{ressource.created_at}</td>
                   <td style={{ whiteSpace: "nowrap" }}>
                     <Link
-                      href={`/ressources/edit/${ressource.res_id}`}
+                      href={`/posts/edit/${ressource.res_id}`}
                       className="btn btn-sm btn-primary mr-1"
                       id="btn-edit"
                     >

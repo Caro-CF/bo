@@ -14,8 +14,7 @@ function AddEdit(props) {
   const post = props?.post;
   const isAddMode = !post;
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
-
+  
   // form validation rules
   const validationSchema = Yup.object().shape({
     post: Yup.string().required("Post requis"),
@@ -40,11 +39,11 @@ function AddEdit(props) {
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
-  // set default form values if user passed in props
-  if (!isAddMode) {
-    const { password, confirmPassword, ...defaultValues } = user;
-    formOptions.defaultValues = defaultValues;
-  }
+  // // set default form values if user passed in props
+  // if (!isAddMode) {
+  //   const { password, confirmPassword, ...defaultValues } = user;
+  //   formOptions.defaultValues = defaultValues;
+  // }
 
   // get functions to build form with useForm() hook
   const { register, handleSubmit, reset, formState } = useForm(formOptions);
@@ -52,16 +51,16 @@ function AddEdit(props) {
 
   function onSubmit(data) {
     console.log("data " + console.table(data));
-    return isAddMode ? createUser(data) : updateUser(data.usr_id, data);
+    return isAddMode ? createPost(data) : updatePost(data.usr_id, data);
     // return createUser2();
   }
 
-  function createUser(data) {
-    console.log("create user : " + data);
-    return userService
+  function createPost(data) {
+    console.log("create post : " + data);
+    return postService
       .register(data)
       .then(() => {
-        alertService.success("Utilisateur ajouté", {
+        alertService.success("Post ajouté", {
           keepAfterRouteChange: true,
         });
         router.push(".");
@@ -70,10 +69,10 @@ function AddEdit(props) {
   }
 
   function updatePost(id, data) {
-    return userService
+    return postService
       .update(id, data)
       .then(() => {
-        alertService.success("Utilisateur mis à jour", {
+        alertService.success("Post mis à jour", {
           keepAfterRouteChange: true,
         });
         router.push("..");
@@ -83,7 +82,7 @@ function AddEdit(props) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="m-5">
-      <h1>{isAddMode ? "Ajouter un utilisateur" : "Modérer un Post"}</h1>
+      <h1>{isAddMode ? "Ajouter un Post" : "Modérer un Post"}</h1>
       <div className="form-row">
         <div className="form-group col-2">
           <img
