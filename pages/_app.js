@@ -55,7 +55,7 @@ function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Administration de ressources nationnales</title>
+        <title>Administration de ressources citoyennes</title>
 
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link

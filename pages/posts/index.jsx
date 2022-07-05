@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
-
 import { Link } from "../../components";
-
-import { ressourceService } from "services/ressource.service";
-import { userService } from "services";
+import { postService } from "services/post.service";
 import InfoModal from "components/InfoModal";
-import { func } from "prop-types";
 
 export default Index;
 
@@ -13,17 +9,15 @@ function Index() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [ressources, setRessources] = useState(null);
-  const [users, setUsers] = useState(null);
+
   // search
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    ressourceService.getAll().then((x) => setRessources(x));
-    userService.getAll().then((y) => setUsers(y));
+    postService.getAll().then((x) => setRessources(x));
   }, []);
 
   console.log(ressources);
-  console.log(users);
 
   function deleteRessource(id) {
     setRessources(
@@ -34,9 +28,9 @@ function Index() {
         return x;
       })
     );
-    userService.delete(id).then(() => {
+    ressourceService.delete(id).then(() => {
       setRessources((ressources) => ressources.filter((x) => x.id !== id));
-      ressourceService.getAll().then((x) => setRessources(x));
+      postService.getAll().then((x) => setRessources(x));
     });
   }
 
@@ -44,7 +38,7 @@ function Index() {
     <div className="m-5">
       <h1>Posts</h1>
       <input
-        className="search float-right"
+        className="search float-right mb-4"
         placeholder="Rechercher..."
         onChange={(e) => setQuery(e.target.value.toLowerCase())}
       />
@@ -69,9 +63,10 @@ function Index() {
               .filter(
                 (search) =>
                   search.answers.toLowerCase().includes(query) ||
-                  search.nb_views.toLowerCase().includes(query) ||
-                  search.nb_likes.toLowerCase().includes(query) ||
-                  search.nb_shares.toLowerCase().includes(query) ||
+                  search.resOwner.pseudo.toLowerCase().includes(query) ||
+                  // search.nb_views.toLowerCase().includes(query) ||
+                  // search.nb_likes.toLowerCase().includes(query) ||
+                  // search.nb_shares.toLowerCase().includes(query) ||
                   search.created_at.toLowerCase().includes(query)
               )
               .map((ressource) => (
@@ -100,22 +95,10 @@ function Index() {
                       Edition
                     </Link>
                     <InfoModal
-                      element="utilisateur"
+                      element="post"
                       id={ressource.res_id}
                       disabled="ressource"
                     ></InfoModal>
-
-                    {/* <button
-                    onClick={() => deleteUser(user.usr_id)}
-                    className="btn btn-sm btn-danger btn-delete-user"
-                    disabled={user.isDeleting}
-                  >
-                    {user.isDeleting ? (
-                      <span className="spinner-border spinner-border-sm"></span>
-                    ) : (
-                      <span>Supprimer</span>
-                    )}
-                  </button> */}
                   </td>
                 </tr>
               ))}

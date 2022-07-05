@@ -13,6 +13,8 @@ export default function InfoModal(props) {
   const handleShow = () => setShow(true);
   const router = useRouter();
 
+  
+
   //   suppression Utilisateur
   const [users, setUsers] = useState(null);
 

@@ -6,18 +6,19 @@ import * as Yup from "yup";
 
 import { Link } from "../Link";
 import { userService, alertService } from "../../services";
+import { ressourceService } from "services/post.service";
 
 export { AddEdit };
 
 function AddEdit(props) {
-  const user = props?.user;
-  const isAddMode = !user;
+  const post = props?.post;
+  const isAddMode = !post;
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   // form validation rules
   const validationSchema = Yup.object().shape({
-    pseudo: Yup.string().required("Pseudo requis"),
+    post: Yup.string().required("Post requis"),
     firstname: Yup.string().required("Prénom requis"),
     lastname: Yup.string().required("Nom requis"),
     mail: Yup.string().email("Email invalide").required("Email est requis"),
@@ -32,7 +33,10 @@ function AddEdit(props) {
         if (password || isAddMode)
           return schema.required("Vous devez Confirmer le mot de passe");
       })
-      .oneOf([Yup.ref("password")], "Les mots de passes doivent correspondrent"),
+      .oneOf(
+        [Yup.ref("password")],
+        "Les mots de passes doivent correspondrent"
+      ),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -54,20 +58,24 @@ function AddEdit(props) {
 
   function createUser(data) {
     console.log("create user : " + data);
-    return userService.register(data)
+    return userService
+      .register(data)
       .then(() => {
-        alertService.success("Utilisateur ajouté", { keepAfterRouteChange: true });
+        alertService.success("Utilisateur ajouté", {
+          keepAfterRouteChange: true,
+        });
         router.push(".");
       })
       .catch(alertService.error);
   }
 
-  
-  function updateUser(id, data) {
+  function updatePost(id, data) {
     return userService
       .update(id, data)
       .then(() => {
-        alertService.success("Utilisateur mis à jour", { keepAfterRouteChange: true });
+        alertService.success("Utilisateur mis à jour", {
+          keepAfterRouteChange: true,
+        });
         router.push("..");
       })
       .catch(alertService.error);
@@ -75,45 +83,27 @@ function AddEdit(props) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="m-5">
-      <h1>{isAddMode ? "Ajouter un utilisateur" : "Editer un utilisateur"}</h1>
-      <div className="form-row">
-        {isAddMode ? (
-          <></>
-        ) : (
-          <div className="form-group col-2">
-            <img
-              src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
-              width={150}
-              height={150}
-              alt="Avatar de l'utilisateur"
-            />
-          </div>
-        )}
-      </div>
+      <h1>{isAddMode ? "Ajouter un utilisateur" : "Modérer un Post"}</h1>
       <div className="form-row">
         <div className="form-group col-2">
-          <label>Role</label>
-          <select
-            name="roles"
-            {...register("roles")}
-            className={`form-control ${errors.roles ? "is-invalid" : ""}`}
-          >
-            <option value=""></option>
-            <option value="Citoyen">Citoyen</option>
-            <option value="Moderateur">Moderateur</option>
-            <option value="Administrateur">Administrateur</option>
-          </select>
-          <div className="invalid-feedback">{errors.roles?.message}</div>
-        </div>
-        <div className="form-group col-5">
-          <label>Pseudo</label>
-          <input
-            name="pseudo"
-            type="text"
-            {...register("pseudo")}
-            className={`form-control ${errors.pseudo ? "is-invalid" : ""}`}
+          <img
+            src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
+            width={150}
+            height={150}
+            alt="Avatar de l'utilisateur"
           />
-          <div className="invalid-feedback">{errors.pseudo?.message}</div>
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-group col-5">
+          <label>Post</label>
+          <input
+            name="post"
+            type="text"
+            {...register("post")}
+            className={`form-control ${errors.post ? "is-invalid" : ""}`}
+          />
+          <div className="invalid-feedback">{errors.post?.message}</div>
         </div>
         <div className="form-group col-5">
           <label>Nom</label>
@@ -247,7 +237,7 @@ function AddEdit(props) {
         >
           Mise a zéro
         </button>
-        <Link href="/users" className="btn btn-link">
+        <Link href="/posts" className="btn btn-link">
           Annuler
         </Link>
       </div>
