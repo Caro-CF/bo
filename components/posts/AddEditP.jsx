@@ -24,11 +24,11 @@ function AddEditP(props) {
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
-  // // set default form values if user passed in props
-  // if (!isAddMode) {
-  //   const { password, confirmPassword, ...defaultValues } = user;
-  //   formOptions.defaultValues = defaultValues;
-  // }
+  // set default form values if post passed in props
+  if (!isAddMode) {
+    const {...defaultValues } = post;
+    formOptions.defaultValues = defaultValues;
+  }
 
   // get functions to build form with useForm() hook
   const { register, handleSubmit, reset, formState } = useForm(formOptions);
@@ -36,7 +36,7 @@ function AddEditP(props) {
 
   function onSubmit(data) {
     console.log("data " + console.table(data));
-    return isAddMode ? createPost(data) : updatePost(data.usr_id, data);
+    return isAddMode ? createPost(data) : updatePost(data.res_id, data);
   }
 
   function createPost(data) {
@@ -67,33 +67,15 @@ function AddEditP(props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="m-5">
       <h1>{isAddMode ? "Ajouter un Post" : "Modérer un Post"}</h1>
-      {/* <div className="form-row">
-        <div className="form-group col-2">
-          <img
-            src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
-            width={150}
-            height={150}
-            alt="Avatar de l'utilisateur"
-          />
-        </div>
-      </div> */}
+
       <div className="form-row">
+        
         <div className="form-group col-5">
           <label>Post</label>
           <input
-            name="post"
+            name="answers"
             type="text"
-            {...register("post")}
-            className={`form-control ${errors.post ? "is-invalid" : ""}`}
-          />
-          <div className="invalid-feedback">{errors.post?.message}</div>
-        </div>
-        <div className="form-group col-5">
-          <label>Post</label>
-          <input
-            name="answer"
-            type="text"
-            {...register("answer")}
+            {...register("answers")}
             className={`form-control ${errors.post ? "is-invalid" : ""}`}
           />
           <div className="invalid-feedback">{errors.post?.message}</div>
@@ -108,99 +90,9 @@ function AddEditP(props) {
           />
           <div className="invalid-feedback">{errors.media?.message}</div>
         </div>
-        {/* <div className="form-group col-2">
-          <label>Téléphone</label>
-          <input
-            name="tel"
-            type="text"
-            {...register("tel")}
-            className={`form-control ${errors.tel ? "is-invalid" : ""}`}
-          />
-          <div className="invalid-feedback">{errors.tel?.message}</div>
-        </div> */}
-        <div className="form-group col-5">
-          <label>Email</label>
-          <input
-            name="mail"
-            type="text"
-            {...register("mail")}
-            className={`form-control ${errors.mail ? "is-invalid" : ""}`}
-          />
-          <div className="invalid-feedback">{errors.mail?.message}</div>
-        </div>
-        {/* <div className="form-group col-4">
-          <label>Date de naissance</label>
-          <input
-            name="birth_date"
-            type="text"
-            {...register("birth_date")}
-            className={`form-control ${errors.birth_date ? "is-invalid" : ""}`}
-          />
-          <div className="invalid-feedback">{errors.birth_date?.message}</div>
-        </div>  */}
+       
       </div>
-      <div className="form-row">
-        {/* <div className="form-group col-7" id="bio">
-          <label>Bio</label>
-          <input
-            name="bio"
-            type="text"
-            {...register("bio")}
-            className={`form-control ${errors.bio ? "is-invalid" : ""}`}
-          />
-          <div className="invalid-feedback">{errors.mail?.message}</div>
-        </div> */}
-      </div>
-
-      {!isAddMode && (
-        <div>
-          <h3 className="pt-3">Changer le mode de passe</h3>
-          <p>Laisser vide pour avoir le même mot de passe</p>
-        </div>
-      )}
-      <div className="form-row">
-        <div className="form-group col">
-          {/* <label>
-            Mot de passe
-            {!isAddMode &&
-              (!showPassword ? (
-                <span>
-                  {" "}
-                  -{" "}
-                  <a
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="text-primary"
-                  >
-                    Montrer
-                  </a>
-                </span>
-              ) : (
-                <em> - {user.password}</em>
-              ))}
-          </label> */}
-          {/* <input
-            name="password"
-            type="password"
-            {...register("password")}
-            className={`form-control ${errors.password ? "is-invalid" : ""}`}
-          /> */}
-          {/* <div className="invalid-feedback">{errors.password?.message}</div>
-        </div>
-        <div className="form-group col">
-          <label>Confirmer le mot de passe</label>
-          <input
-            name="confirmPassword"
-            type="password"
-            {...register("confirmPassword")}
-            className={`form-control ${
-              errors.confirmPassword ? "is-invalid" : ""
-            }`}
-          />
-          <div className="invalid-feedback">
-            {errors.confirmPassword?.message}
-          </div> */}
-        </div>
-      </div>
+      
       <div className="form-group">
         <button
           type="submit"

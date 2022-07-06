@@ -103,18 +103,6 @@ function Index() {
                       id={user.usr_id}
                       disabled="user"
                     ></InfoModal>
-
-                    {/* <button
-                    onClick={() => deleteUser(user.usr_id)}
-                    className="btn btn-sm btn-danger btn-delete-user"
-                    disabled={user.isDeleting}
-                  >
-                    {user.isDeleting ? (
-                      <span className="spinner-border spinner-border-sm"></span>
-                    ) : (
-                      <span>Supprimer</span>
-                    )}
-                  </button> */}
                   </td>
                 </tr>
               ))}

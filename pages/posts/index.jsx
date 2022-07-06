@@ -47,6 +47,7 @@ function Index() {
         <thead>
           <tr>
             <th style={{ width: "10%" }}></th>
+            <th style={{ width: "30%" }}>Ress ID</th>
             <th style={{ width: "30%" }}>Posts</th>
             <th style={{ width: "30%" }}>Media</th>
             <th style={{ width: "30%" }}>Créateur</th>
@@ -64,9 +65,6 @@ function Index() {
                 (search) =>
                   search.answers.toLowerCase().includes(query) ||
                   search.resOwner.pseudo.toLowerCase().includes(query) ||
-                  // search.nb_views.toLowerCase().includes(query) ||
-                  // search.nb_likes.toLowerCase().includes(query) ||
-                  // search.nb_shares.toLowerCase().includes(query) ||
                   search.created_at.toLowerCase().includes(query)
               )
               .map((ressource) => (
@@ -79,6 +77,7 @@ function Index() {
                       alt="Avatar de l'utilisateur"
                     /> */}
                   </td>
+                  <td>{ressource.res_id}</td>
                   <td>{ressource.answers}</td>
                   <td>{ressource.media}</td>
                   <td>{ressource.resOwner.pseudo}</td>

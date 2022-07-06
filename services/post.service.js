@@ -19,27 +19,10 @@ export const postService = {
   },
   getAll,
   getById,
+  register,
   update,
   delete: _delete,
 };
-
-// async function fetchToken() {
-//   const token = localStorage.setItem("token");
-//   console.log(token);
-
-//   const requestOptions = {
-//     method: "get",
-//     headers: {
-//       authorization: `Bearer ${token}`,
-//     },
-//   };
-//   return fetch(`${baseUrl}/me`, requestOptions)
-//     .then((res) => {
-//       const uid = JSON.parse(res);
-//       console.log(uid);
-//     })
-//     .catch((err) => console.log("No token"));
-// }
 
 function getAll() {
   return fetchWrapper.get(baseUrl);
@@ -47,6 +30,10 @@ function getAll() {
 
 function getById(id) {
   return fetchWrapper.get(`${baseUrl}/${id}`);
+}
+
+function register(post) {
+  return fetchWrapper.post(`${baseUrl}/`, post);
 }
 
 function create(params) {
