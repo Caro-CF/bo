@@ -72,13 +72,13 @@ function AddEditP(props) {
         
         <div className="form-group col-5">
           <label>Post</label>
-          <input
+          <textarea
+          rows={4}
             name="answers"
-            type="text"
             {...register("answers")}
-            className={`form-control ${errors.post ? "is-invalid" : ""}`}
+            className={`form-control ${errors.post ? "is-invalid" : ""}`} 
           />
-          <div className="invalid-feedback">{errors.post?.message}</div>
+          <div className="invalid-feedback ">{errors.post?.message}</div>
         </div>
         <div className="form-group col-4">
           <label>Media</label>
