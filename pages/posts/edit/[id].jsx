@@ -1,7 +1,7 @@
-import { AddEdit } from "../../../components/users/AddEdit";
+import { AddEditP } from "components/posts/AddEditP";
 import { postService } from "services/post.service";
 
-export default AddEdit;
+export default AddEditP;
 
 export async function getServerSideProps({ params }) {
   const post = await postService.getById(params.id);

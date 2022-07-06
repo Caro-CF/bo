@@ -1,3 +1,3 @@
-import { AddEdit } from "components/posts";
+import { AddEditP } from "components/posts/AddEditP";
 
-export default AddEdit;
+export default AddEditP;

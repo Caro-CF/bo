@@ -1,6 +1,6 @@
-export { Layout };
+export { LayoutP };
 
-function Layout({ children }) {
+function LayoutP({ children }) {
     return (
         <div className="p-4">
             <div className="container">

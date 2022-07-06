@@ -5,37 +5,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import { Link } from "../Link";
-import { userService, alertService } from "../../services";
-import { ressourceService } from "services/post.service";
+import { alertService } from "../../services";
+import { postService } from "services/post.service";
 
-export { AddEdit };
+export { AddEditP };
 
-function AddEdit(props) {
+function AddEditP(props) {
+  console.log("props");
+  console.log(props);
   const post = props?.post;
   const isAddMode = !post;
   const router = useRouter();
-  
+
   // form validation rules
   const validationSchema = Yup.object().shape({
     post: Yup.string().required("Post requis"),
-    firstname: Yup.string().required("Prénom requis"),
-    lastname: Yup.string().required("Nom requis"),
-    mail: Yup.string().email("Email invalide").required("Email est requis"),
-    roles: Yup.string().required("Role requis"),
-    password: Yup.string()
-      .transform((x) => (x === "" ? undefined : x))
-      .concat(isAddMode ? Yup.string().required("Mot de passe requis") : null)
-      .min(6, "Le mot de passe doit au moins 6 caractères"),
-    confirmPassword: Yup.string()
-      .transform((x) => (x === "" ? undefined : x))
-      .when("password", (password, schema) => {
-        if (password || isAddMode)
-          return schema.required("Vous devez Confirmer le mot de passe");
-      })
-      .oneOf(
-        [Yup.ref("password")],
-        "Les mots de passes doivent correspondrent"
-      ),
+    media: Yup.string().required("Media requis"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -52,7 +37,6 @@ function AddEdit(props) {
   function onSubmit(data) {
     console.log("data " + console.table(data));
     return isAddMode ? createPost(data) : updatePost(data.usr_id, data);
-    // return createUser2();
   }
 
   function createPost(data) {
@@ -83,7 +67,7 @@ function AddEdit(props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="m-5">
       <h1>{isAddMode ? "Ajouter un Post" : "Modérer un Post"}</h1>
-      <div className="form-row">
+      {/* <div className="form-row">
         <div className="form-group col-2">
           <img
             src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
@@ -92,7 +76,7 @@ function AddEdit(props) {
             alt="Avatar de l'utilisateur"
           />
         </div>
-      </div>
+      </div> */}
       <div className="form-row">
         <div className="form-group col-5">
           <label>Post</label>
@@ -105,24 +89,24 @@ function AddEdit(props) {
           <div className="invalid-feedback">{errors.post?.message}</div>
         </div>
         <div className="form-group col-5">
-          <label>Nom</label>
+          <label>Post</label>
           <input
-            name="lastname"
+            name="answer"
             type="text"
-            {...register("lastname")}
-            className={`form-control ${errors.lastname ? "is-invalid" : ""}`}
+            {...register("answer")}
+            className={`form-control ${errors.post ? "is-invalid" : ""}`}
           />
-          <div className="invalid-feedback">{errors.lastname?.message}</div>
+          <div className="invalid-feedback">{errors.post?.message}</div>
         </div>
         <div className="form-group col-4">
-          <label>Prénom</label>
+          <label>Media</label>
           <input
-            name="firstname"
+            name="media"
             type="text"
-            {...register("firstname")}
-            className={`form-control ${errors.firstname ? "is-invalid" : ""}`}
+            {...register("media")}
+            className={`form-control ${errors.media ? "is-invalid" : ""}`}
           />
-          <div className="invalid-feedback">{errors.firstname?.message}</div>
+          <div className="invalid-feedback">{errors.media?.message}</div>
         </div>
         {/* <div className="form-group col-2">
           <label>Téléphone</label>
@@ -176,7 +160,7 @@ function AddEdit(props) {
       )}
       <div className="form-row">
         <div className="form-group col">
-          <label>
+          {/* <label>
             Mot de passe
             {!isAddMode &&
               (!showPassword ? (
@@ -193,14 +177,14 @@ function AddEdit(props) {
               ) : (
                 <em> - {user.password}</em>
               ))}
-          </label>
-          <input
+          </label> */}
+          {/* <input
             name="password"
             type="password"
             {...register("password")}
             className={`form-control ${errors.password ? "is-invalid" : ""}`}
-          />
-          <div className="invalid-feedback">{errors.password?.message}</div>
+          /> */}
+          {/* <div className="invalid-feedback">{errors.password?.message}</div>
         </div>
         <div className="form-group col">
           <label>Confirmer le mot de passe</label>
@@ -214,7 +198,7 @@ function AddEdit(props) {
           />
           <div className="invalid-feedback">
             {errors.confirmPassword?.message}
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="form-group">
