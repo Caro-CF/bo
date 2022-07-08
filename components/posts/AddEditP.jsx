@@ -16,6 +16,7 @@ function AddEditP(props) {
   const post = props?.post;
   const isAddMode = !post;
   const router = useRouter();
+  
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -26,7 +27,7 @@ function AddEditP(props) {
 
   // set default form values if post passed in props
   if (!isAddMode) {
-    const {...defaultValues } = post;
+    const { ...defaultValues } = post;
     formOptions.defaultValues = defaultValues;
   }
 
@@ -69,30 +70,29 @@ function AddEditP(props) {
       <h1>{isAddMode ? "Ajouter un Post" : "Modérer un Post"}</h1>
 
       <div className="form-row">
-        
-        <div className="form-group col-5">
-          <label>Post</label>
-          <textarea
-          rows={4}
-            name="answers"
-            {...register("answers")}
-            className={`form-control ${errors.post ? "is-invalid" : ""}`} 
-          />
-          <div className="invalid-feedback ">{errors.post?.message}</div>
-        </div>
-        <div className="form-group col-4">
+      <div className="form-group col-4">
           <label>Media</label>
-          <input
-            name="media"
-            type="text"
-            {...register("media")}
-            className={`form-control ${errors.media ? "is-invalid" : ""}`}
+          <img
+            src={`http://linksforcitizens.local:3000/public/upload/images/media/${post.media.path}`}
+            width={150}
+            height={150}
+            alt="Avatar de l'utilisateur"
           />
           <div className="invalid-feedback">{errors.media?.message}</div>
         </div>
-       
+        <div className="form-group col-5">
+          <label>Post</label>
+          <textarea
+            rows={4}
+            name="answers"
+            {...register("answers")}
+            className={`form-control ${errors.post ? "is-invalid" : ""}`}
+          />
+          <div className="invalid-feedback ">{errors.post?.message}</div>
+        </div>
+        
       </div>
-      
+
       <div className="form-group">
         <button
           type="submit"
