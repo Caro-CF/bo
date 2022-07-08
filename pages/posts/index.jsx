@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from "../../components";
 import { postService } from "services/post.service";
 import InfoModal from "components/InfoModal";
+import getConfig from "next/config";
 
 export default Index;
 
 function Index() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
   const [ressources, setRessources] = useState(null);
 
   // search
@@ -70,16 +72,17 @@ function Index() {
               .map((ressource) => (
                 <tr key={ressource.res_id}>
                   <td>
-                    {/* <img
-                      src={`http://linksforcitizens.local:3000/public/upload/images/avatar/${user.avatar_img}`}
-                      width={50}
-                      height={50}
-                      alt="Avatar de l'utilisateur"
-                    /> */}
+                    
                   </td>
                   <td>{ressource.res_id}</td>
                   <td>{ressource.answers}</td>
-                  <td>{ressource.media}</td>
+                  <td>
+                  {!ressource.media.path ? <span></span> : <img
+                      src={`http://linksforcitizens.local:3000/public/upload/images/media/${ressource.media.path}`}
+                      width={150}
+                      height={150}
+                      alt="Avatar de l'utilisateur"
+                    />}</td>
                   <td>{ressource.resOwner.pseudo}</td>
                   <td>{ressource.nb_views}</td>
                   <td>{ressource.nb_likes}</td>
