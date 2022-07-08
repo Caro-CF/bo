@@ -1,17 +1,29 @@
-import { render, screen } from "@testing-library/react";
-import { userService } from "services";
+// import { render, screen } from "@testing-library/react";
+// import { userService } from "services";
 import "@testing-library/jest-dom";
+// import Index from "pages/users";
+// import userEvent from "@testing-library/user-event"
+import '@testing-library/jest-dom/extend-expect'
+// import { Link } from "components";
 
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig()
+const sum = (a,b) => {return (a+b)};
 
-it("Doit obtenir id = 5", () => {
-  expect.assertions(1);
-  return expect(userService.getById(5)).resolves.toEqual(5);
+describe("a + b", () => {
+  it("should return a number", () =>
+  expect(sum(1,2)).toBe(3));
 });
 
-test("la donnée est 5", () => {
-  return userService.getById(5).then((data) => {
-    expect(data.data.usr_id).toBe(5);
-  });
-});
+// describe("Index user page", () => {
+//   it("should render", () => {
+//     render(<Index />);
+
+//     userEvent.type(screen.getByAltText(/Avatar de l'utilisateur/i));
+//     userEvent.type(screen.getByTitle("Utilisateurs"));
+//     userEvent.type(screen.getByRole('img'))
+//   });
+
+//   it("link", () => {
+//     render(<Link />);
+//     userEvent.type(screen.findAllByText("Ajouter un utilisateur"))
+//   })
+// });
